@@ -1,6 +1,6 @@
 public class MenuPunkt {
-    String name;
-    MenuAction menuAction;
+    private String name;
+    private MenuAction menuAction;
 
     public MenuPunkt(String name, MenuAction menuAction) {
         this.name = name;
@@ -12,7 +12,12 @@ public class MenuPunkt {
     }
 
 
+    @FunctionalInterface
     public interface MenuAction {
         public void actionRun();
+    }
+
+    public MenuAction getMenuAction() {
+        return menuAction;
     }
 }

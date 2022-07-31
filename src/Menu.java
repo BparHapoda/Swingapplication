@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Menu {
     String name;
@@ -19,5 +20,34 @@ public class Menu {
         for (int i = 0; i < menuList.size(); i++) {
             System.out.print((i + 1) + "." + menuList.get(i).getName() + "\n");
         }
+    }
+
+    public Integer inputNumber() {
+        Integer number = 0;
+        Scanner scanner = new Scanner(System.in);
+
+        try {
+
+            number = scanner.nextInt();
+        } catch (NumberFormatException e) {
+            System.out.println("¬ведите номер пункта меню");
+        } finally {
+
+            return number;
+        }
+    }
+
+    public Integer inputMenuNumber() {
+        Integer number;
+        do {
+            number = inputNumber();
+        }
+        while (number < 1 || number > menuList.size());
+        return number - 1;
+    }
+
+    public void run() {
+        printMenu();
+        menuList.get(inputMenuNumber()).getMenuAction().actionRun();
     }
 }

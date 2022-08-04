@@ -12,7 +12,7 @@ public class TextCollect implements Storage {
 
     @Override
     public void add() {
-        TextDoc.createTextDoc();
+
     }
 
     @Override
@@ -21,7 +21,11 @@ public class TextCollect implements Storage {
     }
 
     public void view() {
-        File file = new File("c:");
+        File file = new File("d:");
+        for (File fileItem : file.listFiles()) {
+            System.out.println(fileItem);
+        }
+
 
     }
 

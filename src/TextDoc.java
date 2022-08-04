@@ -1,5 +1,4 @@
-import java.io.Serial;
-import java.io.Serializable;
+import java.io.*;
 import java.util.Date;
 
 public class TextDoc implements Serializable {
@@ -9,7 +8,6 @@ public class TextDoc implements Serializable {
     private char[] text;
     private String author;
     private Date date;
-    private Long size;
 
     public TextDoc(char[] text, String author, Date date) {
         this.text = text;
@@ -44,15 +42,41 @@ public class TextDoc implements Serializable {
         this.date = date;
     }
 
-    public static TextDoc createTextDoc() {
-        TextDoc textDoc = new TextDoc();
-        textDoc.inputText();
-        return textDoc;
+    public String inputString() {
+        String string = Main.scanner.next();
+        return string;
     }
 
-    public void inputText() {
-        System.out.println("¬ведите текст:");
-        String string = Main.scanner.next();
-        text = string.toCharArray();
+    public void createTextDoc() {
+
+
+        System.out.println("¬ведите автора");
+        author = inputString();
+
+        try {
+            inputText();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
     }
+
+    public void inputText() throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        OutputStream os = new FileOutputStream(reader.readLine());
+
+        while (true) {
+            String data = reader.readLine();
+            if (data.equals("s")) {
+                os.write(data.getBytes());
+                break;
+            } else {
+                os.write((data + "\r\n").getBytes());
+            }
+        }
+        os.close();
+        reader.close();
+    }
+
+
 }

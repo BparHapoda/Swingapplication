@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -48,6 +49,10 @@ public class Menu {
 
     public void run() {
         printMenu();
-        menuList.get(inputMenuNumber()).getMenuAction().actionRun();
+        try {
+            menuList.get(inputMenuNumber()).getMenuAction().actionRun();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

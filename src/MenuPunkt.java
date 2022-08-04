@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 public class MenuPunkt {
     private String name;
     private MenuAction menuAction;
@@ -14,7 +16,7 @@ public class MenuPunkt {
 
     @FunctionalInterface
     public interface MenuAction {
-        public void actionRun();
+        public void actionRun() throws IOException;
     }
 
     public MenuAction getMenuAction() {

@@ -8,4 +8,10 @@ public interface Storage {
     public void view();
 
     public void create() throws IOException;
+
+    public void setRoot();
+
+    public void save();
+
+    public void open();
 }

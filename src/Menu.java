@@ -48,11 +48,13 @@ public class Menu {
     }
 
     public void run() {
-        printMenu();
-        try {
-            menuList.get(inputMenuNumber()).getMenuAction().actionRun();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        while (true) {
+            printMenu();
+            try {
+                menuList.get(inputMenuNumber()).getMenuAction().actionRun();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 }

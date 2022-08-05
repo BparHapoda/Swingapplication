@@ -1,41 +1,91 @@
-import javax.swing.*;
-import java.awt.*;
-import java.io.File;
-import java.util.Arrays;
+import java.io.*;
+import java.util.Scanner;
 
-public class TextCollection extends JFrame {
-    public TextCollection() {
-        super("РўРµРєСЃС‚РѕРІР°СЏ РєРѕР»Р»РµРєС†РёСЏ");
-        JFrame frame = new JFrame("Chat Frame");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(400, 400);
-        JMenuBar ob = new JMenuBar();
-        JMenu ob1 = new JMenu("FILE");
-        JMenu ob2 = new JMenu("Help");
-        ob.add(ob1);
-        ob.add(ob2);
-        JMenuItem m11 = new JMenuItem("Open");
-        JMenuItem m22 = new JMenuItem("Save as");
-        ob1.add(m11);
-        ob1.add(m22);
+public class TextCollection implements Storage {
+    String name;
+    File file;
 
-        JPanel panel = new JPanel(); // the panel is not visible in output
-        JLabel label = new JLabel("Enter Text");
-        JTextField tf = new JTextField(10); // accepts upto 10 characters
-        JButton send = new JButton("Send");
-        JButton reset = new JButton("Reset");
-        panel.add(label); // Components Added using Flow Layout
-        panel.add(label); // Components Added using Flow Layout
-        panel.add(tf);
-        panel.add(send);
-        panel.add(reset);
-        File dir = new File("C:");
-        File[] files = dir.listFiles();
-        JTextArea ta = new JTextArea();
-        tf.setText(Arrays.deepToString(files));
-        frame.getContentPane().add(BorderLayout.WEST, panel);
-        frame.getContentPane().add(BorderLayout.EAST, tf);
-        //   frame.getContentPane().add(BorderLayout.CENTER, ta);
-        frame.setVisible(true);
+    public TextCollection(String name, File file) {
+        this.name = name;
+        this.file = file;
+    }
+
+    @Override
+    public void add() {
+        TextDoc textDoc = new TextDoc();
+        System.out.println("Введите автора :");
+        textDoc.setAuthor(textDoc.inputString());
+        System.out.println("Введите текст  :");
+        textDoc.setText(textDoc.inputText().toCharArray());
+        System.out.println("Введите название файла  :");
+        StringBuilder fileName = new StringBuilder(file.toString());
+        fileName.append(textDoc.inputString());
+        fileName.append(".tdoc");
+        try {
+            FileOutputStream fos = new FileOutputStream(fileName.toString());
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            oos.writeObject(textDoc);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+
+    }
+
+    @Override
+    public void remove() {
+
+    }
+
+    public void view() {
+        for (File fileItem : file.listFiles()) {
+            System.out.println(fileItem);
+        }
+
+
+    }
+
+    public void create() throws IOException {
+        if (!file.exists()) {
+            file.createNewFile();
+        }
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public File getFile() {
+        return file;
+    }
+
+    public void setFile(File file) {
+
+        this.file = file;
+    }
+
+    public void setRoot() {
+        System.out.println("Введите путь к коллекции текстовых файлов:");
+        Scanner scanner = new Scanner(System.in);
+        File dir;
+        do {
+            dir = new File(scanner.nextLine());
+        }
+        while (!dir.isDirectory() && !dir.exists());
+        file = dir;
+    }
+
+    @Override
+    public void save() {
+
+    }
+
+    @Override
+    public void open() {
+
     }
 }

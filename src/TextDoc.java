@@ -1,5 +1,6 @@
 import java.io.*;
-import java.util.Date;
+import java.time.LocalDate;
+import java.util.Scanner;
 
 public class TextDoc implements Serializable {
 
@@ -7,15 +8,10 @@ public class TextDoc implements Serializable {
     private static final long serialVersionUID = 6850662765961184140L;
     private char[] text;
     private String author;
-    private Date date;
-
-    public TextDoc(char[] text, String author, Date date) {
-        this.text = text;
-        this.author = author;
-        this.date = date;
-    }
+    private LocalDate date;
 
     public TextDoc() {
+        date = LocalDate.now();
     }
 
     public char[] getText() {
@@ -34,16 +30,17 @@ public class TextDoc implements Serializable {
         this.author = author;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 
     public String inputString() {
-        String string = Main.scanner.next();
+        Scanner scanner = new Scanner(System.in);
+        String string = scanner.next();
         return string;
     }
 
@@ -53,29 +50,25 @@ public class TextDoc implements Serializable {
         System.out.println("¬ведите автора");
         author = inputString();
 
-        try {
-            inputText();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        inputText();
 
     }
 
-    public void inputText() throws IOException {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        OutputStream os = new FileOutputStream(reader.readLine());
+    public String inputText() {
+        InputStreamReader inputStreamReader = new InputStreamReader(System.in);
+        BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
 
+        String text;
+        StringBuffer sb = new StringBuffer();
         while (true) {
-            String data = reader.readLine();
-            if (data.equals("s")) {
-                os.write(data.getBytes());
-                break;
-            } else {
-                os.write((data + "\r\n").getBytes());
+            try {
+                if ((text = bufferedReader.readLine()).equals("ESC")) break;
+            } catch (IOException e) {
+                throw new RuntimeException(e);
             }
+            sb.append(text);
         }
-        os.close();
-        reader.close();
+        return sb.toString();
     }
 
 

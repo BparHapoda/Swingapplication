@@ -1,8 +1,8 @@
 import java.io.IOException;
 
 public class MenuPunkt {
-    private String name;
-    private MenuAction menuAction;
+    private final String name;
+    private final MenuAction menuAction;
 
     public MenuPunkt(String name, MenuAction menuAction) {
         this.name = name;
@@ -16,7 +16,7 @@ public class MenuPunkt {
 
     @FunctionalInterface
     public interface MenuAction {
-        public void actionRun() throws IOException;
+        void actionRun() throws IOException;
     }
 
     public MenuAction getMenuAction() {

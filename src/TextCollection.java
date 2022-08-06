@@ -1,7 +1,10 @@
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Scanner;
 
-public class TextCollection implements Storage {
+public class TextCollection implements Storage, Serializable {
+    @Serial
+    private static final long serialVersionUID = 5154197581460058884L;
     String name;
     File file;
 
@@ -10,20 +13,30 @@ public class TextCollection implements Storage {
         this.file = file;
     }
 
+    public TextCollection() {
+    }
+
     @Override
     public void add() {
         TextDoc textDoc = new TextDoc();
         System.out.println("Введите автора :");
         textDoc.setAuthor(textDoc.inputString());
         System.out.println("Введите текст  :");
-        textDoc.setText(textDoc.inputText().toCharArray());
+
+
+        try {
+            textDoc.setText(textDoc.inputText().toCharArray());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         System.out.println("Введите название файла  :");
-        StringBuilder fileName = new StringBuilder(file.toString());
+        StringBuilder fileName = new StringBuilder();
+        fileName.append(file);
         fileName.append(textDoc.inputString());
         fileName.append(".tdoc");
-        try {
-            FileOutputStream fos = new FileOutputStream(fileName.toString());
-            ObjectOutputStream oos = new ObjectOutputStream(fos);
+        System.out.println(fileName.toString());
+        try (FileOutputStream fos = new FileOutputStream(fileName.toString());
+             ObjectOutputStream oos = new ObjectOutputStream(fos);) {
             oos.writeObject(textDoc);
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -38,12 +51,23 @@ public class TextCollection implements Storage {
     }
 
     public void view() {
-        for (File fileItem : file.listFiles()) {
-            System.out.println(fileItem);
+        ArrayList<File> fileList = createFileList();
+        for (File fileItem : fileList) {
+            System.out.println(fileItem.toString());
         }
+    }
 
+    public ArrayList createFileList() {
+        ArrayList<File> collection = new ArrayList<>();
+        String regex = ".+tdoc$";
+        for (File fileItem : file.listFiles()) {
+            if (fileItem.toString().matches(regex))
+                collection.add(fileItem);
+        }
+        return collection;
 
     }
+
 
     public void create() throws IOException {
         if (!file.exists()) {
@@ -82,10 +106,48 @@ public class TextCollection implements Storage {
     @Override
     public void save() {
 
+        try (FileOutputStream fileOutputStream = new FileOutputStream(new File("textcollection.tcol"));
+             ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+        ) {
+            objectOutputStream.writeObject(this);
+        } catch (IOException e) {
+            throw new RuntimeException();
+        }
+
+    }
+
+
+    @Override
+    public TextCollection open() {
+        TextCollection textCollection;
+        try (FileInputStream fileInputStream = new FileInputStream(new File("textcollection.tcol"));
+             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);) {
+            textCollection = (TextCollection) objectInputStream.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            throw new RuntimeException();
+        }
+        return textCollection;
+
+
     }
 
     @Override
-    public void open() {
+    public void openFileFromCollection(Storage storage) {
+        ArrayList<File> fileList = new ArrayList<>();
+        fileList = createFileList();
+        Menu menu1 = new Menu("Какой файл коллекции открыть :");
+        for (int i = 0; i < fileList.size(); i++) {
+            File x = fileList.get(i);
+            menu1.add(x.toString(), () -> storage.openFile(x));
+        }
+        menu1.add("Выход", () -> menu1.setExit(true));
+        menu1.run();
+    }
+
+
+    @Override
+    public void openFile(File file) {
 
     }
+
 }

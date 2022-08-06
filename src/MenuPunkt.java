@@ -16,7 +16,7 @@ public class MenuPunkt {
 
     @FunctionalInterface
     public interface MenuAction {
-        void actionRun() throws IOException;
+        void actionRun();
     }
 
     public MenuAction getMenuAction() {

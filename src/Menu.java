@@ -4,8 +4,10 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Menu {
+    private
     String name;
-    List<MenuPunkt> menuList = new ArrayList<>();
+    private boolean exit;
+    private final List<MenuPunkt> menuList = new ArrayList<>();
 
     public Menu(String name) {
         this.name = name;
@@ -14,6 +16,14 @@ public class Menu {
     public void add(String name, MenuPunkt.MenuAction menuAction) {
 
         menuList.add(new MenuPunkt(name, menuAction));
+    }
+
+    public boolean isExit() {
+        return exit;
+    }
+
+    public void setExit(boolean exit) {
+        this.exit = exit;
     }
 
     public void printMenu() {
@@ -48,13 +58,10 @@ public class Menu {
     }
 
     public void run() {
-        while (true) {
+
+        while (!exit) {
             printMenu();
-            try {
-                menuList.get(inputMenuNumber()).getMenuAction().actionRun();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+            menuList.get(inputMenuNumber()).getMenuAction().actionRun();
         }
     }
 }

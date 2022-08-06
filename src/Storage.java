@@ -1,3 +1,4 @@
+import java.io.File;
 import java.io.IOException;
 
 public interface Storage {
@@ -13,5 +14,12 @@ public interface Storage {
 
     public void save();
 
-    public void open();
+    public Storage open();
+
+    public void openFileFromCollection(Storage storage);
+
+
+    public void openFile(File file);
+
+
 }

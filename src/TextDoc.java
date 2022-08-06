@@ -39,35 +39,29 @@ public class TextDoc implements Serializable {
     }
 
     public String inputString() {
+        String string = "";
         Scanner scanner = new Scanner(System.in);
-        String string = scanner.next();
+        string = scanner.nextLine();
         return string;
     }
 
-    public void createTextDoc() {
 
+    public String inputText() throws IOException {
 
-        System.out.println("¬ведите автора");
-        author = inputString();
-
-        inputText();
-
-    }
-
-    public String inputText() {
+        StringBuffer sb = new StringBuffer();
+        String text;
         InputStreamReader inputStreamReader = new InputStreamReader(System.in);
         BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
 
-        String text;
-        StringBuffer sb = new StringBuffer();
         while (true) {
-            try {
-                if ((text = bufferedReader.readLine()).equals("ESC")) break;
-            } catch (IOException e) {
-                throw new RuntimeException(e);
+            text = bufferedReader.readLine();
+            if (text.equals("ESC")) {
+                break;
             }
             sb.append(text);
         }
+
+
         return sb.toString();
     }
 

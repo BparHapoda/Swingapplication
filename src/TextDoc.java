@@ -1,12 +1,16 @@
 import java.io.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Stream;
 
 public class TextDoc implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 6850662765961184140L;
-    private char[] text;
+    private Character[] text;
     private String author;
     private LocalDate date;
 
@@ -14,11 +18,11 @@ public class TextDoc implements Serializable {
         date = LocalDate.now();
     }
 
-    public char[] getText() {
+    public Character[] getText() {
         return text;
     }
 
-    public void setText(char[] text) {
+    public void setText(Character[] text) {
         this.text = text;
     }
 
@@ -45,6 +49,13 @@ public class TextDoc implements Serializable {
         return string;
     }
 
+    public Character[] toCharacterArray(String string) {
+        Character array[] = new Character[string.length()];
+        for (int i = 0; i < string.length(); i++) {
+            array[i] = string.charAt(i);
+        }
+        return array;
+    }
 
     public String inputText() throws IOException {
 
@@ -65,5 +76,43 @@ public class TextDoc implements Serializable {
         return sb.toString();
     }
 
+    public void print(Character[] text) {
+        int x = 0;
+        int y = 100;
+        int z = 10;
+        int a;
+        int stat = 0;
+        while (true) {
+            x = stat;
+            for (int i = 0; i < z; i++) {
+                Stream.of(text).skip(x).limit(y).forEach(System.out::print);
+                x = x + y;
+                System.out.print("\n");
+            }
+
+            Scanner scanner = new Scanner(System.in);
+            while (true) {
+                a = scanner.nextInt();
+
+                if ((a != 0) || (a != 9)) {
+                    break;
+                }
+            }
+
+            if (a == 0) {
+                stat = stat + y * z;
+                if (stat > text.length - y * z) {
+                    stat = text.length - y * z;
+                }
+            } else if (a == 9) {
+                stat -= y * z;
+                if (stat < 0) {
+                    stat = 0;
+                }
+            } else if (a == 1) {
+                break;
+            }
+        }
+    }
 
 }

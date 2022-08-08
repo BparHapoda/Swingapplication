@@ -19,7 +19,7 @@ public interface Storage {
     public void openFileFromCollection(Storage storage);
 
 
-    public void openFile(File file);
+    public TextDoc openFile(File file);
 
 
 }

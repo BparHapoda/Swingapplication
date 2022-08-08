@@ -25,7 +25,8 @@ public class TextCollection implements Storage, Serializable {
 
 
         try {
-            textDoc.setText(textDoc.inputText().toCharArray());
+            Character[] array = textDoc.toCharacterArray(textDoc.inputText());
+            textDoc.setText(array);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -138,7 +139,10 @@ public class TextCollection implements Storage, Serializable {
         Menu menu1 = new Menu("Какой файл коллекции открыть :");
         for (int i = 0; i < fileList.size(); i++) {
             File x = fileList.get(i);
-            menu1.add(x.toString(), () -> storage.openFile(x));
+            menu1.add(x.toString(), () -> {
+                TextDoc textDoc = storage.openFile(x);
+                textDoc.print(textDoc.getText());
+            });
         }
         menu1.add("Выход", () -> menu1.setExit(true));
         menu1.run();
@@ -146,8 +150,17 @@ public class TextCollection implements Storage, Serializable {
 
 
     @Override
-    public void openFile(File file) {
+    public TextDoc openFile(File file) {
+        try (
+                FileInputStream fileInputStream = new FileInputStream(file);
+                ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);) {
+            TextDoc textDoc = (TextDoc) objectInputStream.readObject();
+            return textDoc;
+        } catch (IOException | ClassNotFoundException e) {
+            throw new RuntimeException();
+        }
 
     }
+
 
 }

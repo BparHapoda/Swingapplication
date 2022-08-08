@@ -1,6 +1,7 @@
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.stream.Stream;
 
 public class TextCollection implements Storage, Serializable {
     @Serial
@@ -54,7 +55,12 @@ public class TextCollection implements Storage, Serializable {
     public void view() {
         ArrayList<File> fileList = createFileList();
         for (File fileItem : fileList) {
-            System.out.println(fileItem.toString());
+            Character array[] = new Character[fileItem.toString().length()];
+            for (int i = 0; i < fileItem.toString().length(); i++) {
+                array[i] = fileItem.toString().charAt(i);
+            }
+            Stream.of(array).skip(2).forEach(System.out::print);
+            System.out.print("\n");
         }
     }
 

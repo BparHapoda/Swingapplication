@@ -1,4 +1,3 @@
-import java.io.IOException;
 
 public class MenuPunkt {
     private final String name;

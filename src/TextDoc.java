@@ -1,8 +1,5 @@
 import java.io.*;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Stream;
 
@@ -76,19 +73,36 @@ public class TextDoc implements Serializable {
         return sb.toString();
     }
 
+    public void find(Character[] text) {
+        int index = 0;
+        System.out.println("¬ведите текст дл€ поиска : ");
+        String find = inputString();
+        char[] findArray = find.toCharArray();
+        for (int i = index; i < text.length; i++) {
+
+        }
+
+
+    }
+
+    public void printPage(int startSymbol, int linesInPage, int symbolsInLine) {
+        for (int i = 0; i < linesInPage; i++) {
+            Stream.of(text).skip(startSymbol).limit(symbolsInLine).forEach(System.out::print);
+            startSymbol = startSymbol + symbolsInLine;
+            System.out.print("\n");
+        }
+
+    }
+
     public void print(Character[] text) {
-        int x = 0;
-        int y = 100;
-        int z = 10;
+        int startSymbol = 0;
+        int symbolsInLine = 100;
+        int linesInPage = 10;
         int a;
-        int stat = 0;
+        int begin = 0;
         while (true) {
-            x = stat;
-            for (int i = 0; i < z; i++) {
-                Stream.of(text).skip(x).limit(y).forEach(System.out::print);
-                x = x + y;
-                System.out.print("\n");
-            }
+            startSymbol = begin;
+            printPage(startSymbol, linesInPage, symbolsInLine);
 
             Scanner scanner = new Scanner(System.in);
             while (true) {
@@ -100,19 +114,19 @@ public class TextDoc implements Serializable {
             }
 
             if (a == 0) {
-                stat = stat + y * z;
-                if (stat > text.length - y * z) {
-                    stat = text.length - y * z;
+                begin = begin + symbolsInLine * linesInPage;
+                if (begin > text.length - symbolsInLine * linesInPage) {
+                    begin = text.length - symbolsInLine * linesInPage;
+
                 }
             } else if (a == 9) {
-                stat -= y * z;
-                if (stat < 0) {
-                    stat = 0;
+                begin -= symbolsInLine * linesInPage;
+                if (begin < 0) {
+                    begin = 0;
                 }
             } else if (a == 1) {
                 break;
             }
         }
     }
-
 }

@@ -36,19 +36,14 @@ public class TextCollection implements Storage, Serializable {
         fileName.append(file);
         fileName.append(textDoc.inputString());
         fileName.append(".tdoc");
-        System.out.println(fileName.toString());
+        System.out.println(fileName);
         try (FileOutputStream fos = new FileOutputStream(fileName.toString());
-             ObjectOutputStream oos = new ObjectOutputStream(fos);) {
+             ObjectOutputStream oos = new ObjectOutputStream(fos)) {
             oos.writeObject(textDoc);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
-
-    }
-
-    @Override
-    public void remove() {
 
     }
 
@@ -113,7 +108,7 @@ public class TextCollection implements Storage, Serializable {
     @Override
     public void save() {
 
-        try (FileOutputStream fileOutputStream = new FileOutputStream(new File("textcollection.tcol"));
+        try (FileOutputStream fileOutputStream = new FileOutputStream("textcollection.tcol");
              ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
         ) {
             objectOutputStream.writeObject(this);
@@ -140,11 +135,9 @@ public class TextCollection implements Storage, Serializable {
 
     @Override
     public void openFileFromCollection(Storage storage) {
-        ArrayList<File> fileList = new ArrayList<>();
-        fileList = createFileList();
+        ArrayList<File> fileList = createFileList();
         Menu menu1 = new Menu("Какой файл коллекции открыть :");
-        for (int i = 0; i < fileList.size(); i++) {
-            File x = fileList.get(i);
+        for (File x : fileList) {
             menu1.add(x.toString(), () -> {
                 TextDoc textDoc = storage.openFile(x);
                 textDoc.print(textDoc.getText());

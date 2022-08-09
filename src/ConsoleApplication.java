@@ -1,14 +1,12 @@
 import java.io.File;
 
 public class ConsoleApplication {
-    String name;
 
     public ConsoleApplication() {
 
     }
 
     public void run() {
-        Menu menu = new Menu("Text collection");
         File file = new File("textcollection.tcol");
         Storage storage = new TextCollection();
         if (file.exists()) {
@@ -17,7 +15,7 @@ public class ConsoleApplication {
             System.out.println("Cоздайте новую коллекцию текстовых файлов,задав ей корневую папку.");
             storage.setRoot();
         }
-        menu = createMenuApplication(storage);
+      Menu menu = createMenuApplication(storage);
         menu.run();
 
     }

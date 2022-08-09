@@ -1,25 +1,23 @@
 import java.io.File;
-import java.io.IOException;
+
 
 public interface Storage {
-    public void add();
-
-    public void remove();
-
-    public void view();
-
-    public void create() throws IOException;
-
-    public void setRoot();
-
-    public void save();
-
-    public Storage open();
-
-    public void openFileFromCollection(Storage storage);
+     void add();
 
 
-    public TextDoc openFile(File file);
+    void view();
+
+
+    void setRoot();
+
+    void save();
+
+    Storage open();
+
+    void openFileFromCollection(Storage storage);
+
+
+    TextDoc openFile(File file);
 
 
 }

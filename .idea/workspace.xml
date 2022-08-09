@@ -2,11 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9433606d-6559-4b09-b1f1-cff127c0cd62" name="Changes" comment="Добавлен открытие файла с пролистыванием вперед и назад">
-      <change afterPath="$PROJECT_DIR$/aaa.tdoc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hhh.tdoc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www.tdoc" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ConsoleApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ConsoleApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Menu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MenuPunkt.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MenuPunkt.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Storage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Storage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TextCollection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TextCollection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TextDoc.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TextDoc.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -160,7 +162,14 @@
       <option name="project" value="LOCAL" />
       <updated>1659992866848</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Добавлен открытие файла с пролистыванием вперед и назад">
+      <created>1659995269493</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1659995269493</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

@@ -1,11 +1,10 @@
-import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class Menu {
-    private
-    String name;
+    private final String name;
     private boolean exit;
     private final List<MenuPunkt> menuList = new ArrayList<>();
 
@@ -18,9 +17,7 @@ public class Menu {
         menuList.add(new MenuPunkt(name, menuAction));
     }
 
-    public boolean isExit() {
-        return exit;
-    }
+
 
     public void setExit(boolean exit) {
         this.exit = exit;
@@ -34,7 +31,7 @@ public class Menu {
     }
 
     public Integer inputNumber() {
-        Integer number = 0;
+        int number = 0;
         Scanner scanner = new Scanner(System.in);
 
         try {
@@ -42,10 +39,10 @@ public class Menu {
             number = scanner.nextInt();
         } catch (NumberFormatException e) {
             System.out.println("¬ведите номер пункта меню");
-        } finally {
+        }
 
             return number;
-        }
+
     }
 
     public Integer inputMenuNumber() {

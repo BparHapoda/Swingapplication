@@ -1,13 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9433606d-6559-4b09-b1f1-cff127c0cd62" name="Changes" comment="Добавлен открытие файла с пролистыванием вперед и назад">
+    <list default="true" id="9433606d-6559-4b09-b1f1-cff127c0cd62" name="Changes" comment="Добавлен открытие">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ConsoleApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ConsoleApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Menu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/MenuPunkt.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MenuPunkt.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Storage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Storage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TextCollection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TextCollection.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TextDoc.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TextDoc.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -169,7 +164,14 @@
       <option name="project" value="LOCAL" />
       <updated>1659995269493</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Добавлен открытие">
+      <created>1660078850406</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1660078850406</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -193,7 +195,8 @@
     <MESSAGE value="Добавлен пункт добавление и сохранение текстового документа" />
     <MESSAGE value="Добавлено изменение корневой папки,вывод колеекции,и загрузка сохр коллекции" />
     <MESSAGE value="Добавлен открытие файла с пролистыванием вперед и назад" />
-    <option name="LAST_COMMIT_MESSAGE" value="Добавлен открытие файла с пролистыванием вперед и назад" />
+    <MESSAGE value="Добавлен открытие" />
+    <option name="LAST_COMMIT_MESSAGE" value="Добавлен открытие" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
 </project>

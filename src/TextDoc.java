@@ -1,5 +1,7 @@
 import java.io.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 import java.util.stream.Stream;
 
@@ -73,16 +75,34 @@ public class TextDoc implements Serializable {
         return sb.toString();
     }
 
-    public void find(Character[] text) {
+    public void find(Character[] find) {
+        ArrayList<Integer> found = new ArrayList<>();
         int index = 0;
-        System.out.println("¬ведите текст дл€ поиска : ");
-        String find = inputString();
-        char[] findArray = find.toCharArray();
+        System.out.println(text.length);
         for (int i = index; i < text.length; i++) {
-
+            if (findWord(i, find)) {
+                System.out.println("нашел на месте " + i);
+                found.add(i);
+            }
         }
+        System.out.println("нашел " + found.size() + " слов");
 
 
+    }
+
+    public boolean findWord(int i, Character[] findArray) {
+        int count = 0;
+        for (int j = 0; j < findArray.length; j++) {
+            if (text[i].equals(findArray[j])) {
+                count++;
+                i++;
+            }
+        }
+        if (count == findArray.length) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public void printPage(int startSymbol, int linesInPage, int symbolsInLine) {
@@ -126,6 +146,10 @@ public class TextDoc implements Serializable {
                 }
             } else if (a == 1) {
                 break;
+            } else if (a == 2) {
+                System.out.println("¬ведите слово дл€ поиска :");
+                String string = inputString();
+                find(toCharacterArray(string));
             }
         }
     }

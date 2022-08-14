@@ -21,7 +21,7 @@ public class ConsoleApplication {
     }
 
     public Menu createMenuApplication(Storage storage) {
-        Menu menu = new Menu("Главное меню :");
+        Menu menu = new Menu("Главное меню :", false);
         menu.add("Добавить текстовый документ", storage::add);
         menu.add("Открыть текстовый документ", () -> storage.openFileFromCollection(storage));
         menu.add("Поиск по документу", System.out::println);

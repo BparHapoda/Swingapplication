@@ -136,7 +136,7 @@ public class TextCollection implements Storage, Serializable {
     @Override
     public void openFileFromCollection(Storage storage) {
         ArrayList<File> fileList = createFileList();
-        Menu menu1 = new Menu("Какой файл коллекции открыть :");
+        Menu menu1 = new Menu("Какой файл коллекции открыть :", false);
         for (File x : fileList) {
             menu1.add(x.toString(), () -> {
                 TextDoc textDoc = storage.openFile(x);

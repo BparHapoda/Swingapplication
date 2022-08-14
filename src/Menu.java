@@ -7,9 +7,11 @@ public class Menu {
     private final String name;
     private boolean exit;
     private final List<MenuPunkt> menuList = new ArrayList<>();
+    private boolean horizontal = false;
 
-    public Menu(String name) {
+    public Menu(String name, boolean horizontal) {
         this.name = name;
+        this.horizontal = horizontal;
     }
 
     public void add(String name, MenuPunkt.MenuAction menuAction) {
@@ -24,9 +26,15 @@ public class Menu {
     }
 
     public void printMenu() {
-        System.out.println(name);
-        for (int i = 0; i < menuList.size(); i++) {
-            System.out.print((i + 1) + "." + menuList.get(i).getName() + "\n");
+        if (!horizontal) {
+            System.out.println(name);
+            for (int i = 0; i < menuList.size(); i++) {
+                System.out.print((i + 1) + "." + menuList.get(i).getName() + "\n");
+            }
+        } else {
+            for (int i = 0; i < menuList.size(); i++) {
+                System.out.print((i + 1) + "." + menuList.get(i).getName() + "  ");
+            }
         }
     }
 

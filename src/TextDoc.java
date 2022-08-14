@@ -76,41 +76,14 @@ public class TextDoc implements Serializable {
         return sb.toString();
     }
 
-    public ArrayList<Integer> find(Character[] find) {
-        ArrayList<Integer> found = new ArrayList<>();
-        int index = 0;
-        for (int i = index; i < text.length; i++) {
-            if (findWord(i, find)) {
-                System.out.println("нашел на месте " + i);
-                found.add(i);
-            }
-        }
-        return found;
 
-
-    }
-
-    public boolean findWord(int i, Character[] findArray) {
-        int count = 0;
-        for (int j = 0; j < findArray.length; j++) {
-            if (text[i].equals(findArray[j])) {
-                count++;
-                i++;
-            }
-        }
-        if (count == findArray.length) {
-            return true;
-        } else {
-            return false;
-        }
-    }
 
 
 
     public void print(Character[] text) {
-        Console console = new Console(2, 10);
+        Console console = new Console(15, 60);
         console.create(text);
-        System.out.println(console.getPages().get(0).getText());
+        console.outputPageText();
 
 
     }

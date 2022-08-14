@@ -2,6 +2,7 @@ import java.io.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Stream;
 
@@ -75,17 +76,16 @@ public class TextDoc implements Serializable {
         return sb.toString();
     }
 
-    public void find(Character[] find) {
+    public ArrayList<Integer> find(Character[] find) {
         ArrayList<Integer> found = new ArrayList<>();
         int index = 0;
-        System.out.println(text.length);
         for (int i = index; i < text.length; i++) {
             if (findWord(i, find)) {
                 System.out.println("нашел на месте " + i);
                 found.add(i);
             }
         }
-        System.out.println("нашел " + found.size() + " слов");
+        return found;
 
 
     }
@@ -105,52 +105,13 @@ public class TextDoc implements Serializable {
         }
     }
 
-    public void printPage(int startSymbol, int linesInPage, int symbolsInLine) {
-        for (int i = 0; i < linesInPage; i++) {
-            Stream.of(text).skip(startSymbol).limit(symbolsInLine).forEach(System.out::print);
-            startSymbol = startSymbol + symbolsInLine;
-            System.out.print("\n");
-        }
 
-    }
 
     public void print(Character[] text) {
-        int startSymbol = 0;
-        int symbolsInLine = 100;
-        int linesInPage = 10;
-        int a;
-        int begin = 0;
-        while (true) {
-            startSymbol = begin;
-            printPage(startSymbol, linesInPage, symbolsInLine);
+        Console console = new Console(2, 10);
+        console.create(text);
+        System.out.println(console.getPages().get(0).getText());
 
-            Scanner scanner = new Scanner(System.in);
-            while (true) {
-                a = scanner.nextInt();
 
-                if ((a != 0) || (a != 9)) {
-                    break;
-                }
-            }
-
-            if (a == 0) {
-                begin = begin + symbolsInLine * linesInPage;
-                if (begin > text.length - symbolsInLine * linesInPage) {
-                    begin = text.length - symbolsInLine * linesInPage;
-
-                }
-            } else if (a == 9) {
-                begin -= symbolsInLine * linesInPage;
-                if (begin < 0) {
-                    begin = 0;
-                }
-            } else if (a == 1) {
-                break;
-            } else if (a == 2) {
-                System.out.println("¬ведите слово дл€ поиска :");
-                String string = inputString();
-                find(toCharacterArray(string));
-            }
-        }
     }
 }

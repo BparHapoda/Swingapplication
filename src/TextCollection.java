@@ -26,8 +26,8 @@ public class TextCollection implements Storage, Serializable {
 
 
         try {
-            Character[] array = textDoc.toCharacterArray(textDoc.inputText());
-            textDoc.setText(array);
+            String text = textDoc.inputText();
+            textDoc.setText(text);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

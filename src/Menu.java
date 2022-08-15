@@ -65,6 +65,7 @@ public class Menu {
     public void run() {
 
         while (!exit) {
+            System.out.println("");
             printMenu();
             menuList.get(inputMenuNumber()).getMenuAction().actionRun();
         }

@@ -10,7 +10,7 @@ public class TextDoc implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 6850662765961184140L;
-    private Character[] text;
+    private String text;
     private String author;
     private LocalDate date;
 
@@ -18,11 +18,11 @@ public class TextDoc implements Serializable {
         date = LocalDate.now();
     }
 
-    public Character[] getText() {
+    public String getText() {
         return text;
     }
 
-    public void setText(Character[] text) {
+    public void setText(String text) {
         this.text = text;
     }
 
@@ -77,11 +77,8 @@ public class TextDoc implements Serializable {
     }
 
 
-
-
-
-    public void print(Character[] text) {
-        Console console = new Console(15, 60);
+    public void print(String string) {
+        Console console = new Console(10, 100);
         console.create(text);
         console.outputPageText();
 

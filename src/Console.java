@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.StringTokenizer;
 
 public class Console {
     private ArrayList<Page> pages = new ArrayList<>();
@@ -12,74 +13,65 @@ public class Console {
 
     }
 
-    public void create(Character[] text) {
-
-        int lineCounter = 0;
-
-
-        ArrayList<String> page = new ArrayList<>();
+    public void create(String text) {
+        int numberPage = 1;
+        ArrayList<String> lines = new ArrayList<>();
         StringBuilder stringBuilder = new StringBuilder();
+        StringBuilder textLine = new StringBuilder();
 
-        int number = 1;
-        int i = 0;
-        int start = 0;
-        int finish = 0;
-        while (i < text.length) {
-
-            start = i;
-            if ((start + symbolsInLine) > text.length) {
-                finish = text.length;
-            } else {
-                finish = start + symbolsInLine;
+        StringTokenizer stringTokenizer = new StringTokenizer(text, " ");
+        int lineCounter;
+        while (true) {
+            if (!stringTokenizer.hasMoreTokens()) {
+                break;
             }
-            for (int j = start; j < finish; j++) {
-                stringBuilder.append(text[j]);
-                i++;
-                if (text[j] == '\n') {
-                    i++;
-                    lineCounter++;
-                    page.add(stringBuilder.toString());
-                    stringBuilder.delete(0, stringBuilder.length());
-                }
-
-            }
-            page.add(stringBuilder.toString());
             stringBuilder.delete(0, stringBuilder.length());
-            lineCounter++;
+            stringBuilder.append(stringTokenizer.nextToken());
+            stringBuilder.append(" ");
+            if ((textLine.length() + stringBuilder.length()) >= symbolsInLine) {
+                lines.add(textLine.toString());
+                textLine.delete(0, textLine.length());
+                textLine.append(stringBuilder);
+            } else {
+                textLine.append(stringBuilder);
+                stringBuilder.delete(0, stringBuilder.length());
+            }
 
-            if (lineCounter == line || i == text.length) {
-
-
-                pages.add(new Page(page, number));
-                number++;
-
-
-                ArrayList<String> temp = new ArrayList<>();
-                page = temp;
-                lineCounter = 0;
+            if (lines.size() == line) {
+                pages.add(new Page(lines, pages.size() + 1));
+                lines = new ArrayList<>();
             }
         }
 
     }
 
+
     public void outputPageText() {
-        printPage(1);
+        printPage();
         Menu menu2 = new Menu("Открытие файла", true);
         menu2.add("предъидущая страница", () -> {
             index--;
-            printPage(index);
+            printPage();
         });
         menu2.add("следующая страница", () -> {
             index++;
-            printPage(index);
+            printPage();
         });
+        menu2.add("Поиск по документу", System.out::println);
+        menu2.add("Поиск и замена", System.out::println);
+        menu2.add("Выход", () -> menu2.setExit(true));
         menu2.run();
 
 
     }
 
-    public void printPage(int numberPage) {
-        System.out.println(pages.get(0).getNumber());
-        pages.stream().filter(page -> page.getNumber() == numberPage).forEach(Page::print);
+    public void printPage() {
+        if (index < 1) {
+            index = 1;
+        }
+        if (index > pages.size()) {
+            index = pages.size();
+        }
+        pages.stream().filter(page -> page.getNumber() == index).forEach(Page::print);
     }
 }

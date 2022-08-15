@@ -24,8 +24,7 @@ public class ConsoleApplication {
         Menu menu = new Menu("Главное меню :", false);
         menu.add("Добавить текстовый документ", storage::add);
         menu.add("Открыть текстовый документ", () -> storage.openFileFromCollection(storage));
-        menu.add("Поиск по документу", System.out::println);
-        menu.add("Поиск и замена", System.out::println);
+
         menu.add("Задать корневую папку коллекции", storage::setRoot);
         menu.add("Показать коллекцию", storage::view);
         menu.add("Показать свойства файла", System.out::println);

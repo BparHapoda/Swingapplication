@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9433606d-6559-4b09-b1f1-cff127c0cd62" name="Changes" comment="Добавлен поиск слов">
-      <change afterPath="$PROJECT_DIR$/qwerty.tdoc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/java.tdoc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/warrrrrrrr.tdoc" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Console.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Console.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ConsoleApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ConsoleApplication.java" afterDir="false" />
@@ -205,7 +206,14 @@
       <option name="project" value="LOCAL" />
       <updated>1660467229544</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="Добавлен поиск слов">
+      <created>1660511772393</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1660511772393</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -233,5 +241,16 @@
     <MESSAGE value="Добавлен поиск слов" />
     <option name="LAST_COMMIT_MESSAGE" value="Добавлен поиск слов" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Console.java</url>
+          <line>16</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

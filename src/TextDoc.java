@@ -76,9 +76,15 @@ public class TextDoc implements Serializable {
         return sb.toString();
     }
 
+    public String showAttributes(File x) {
+        String string = "Cвойства файла :" + "\n" + "Название :" + x + "\n" + "Автор : " + author + "\n" + "Дата создания :" + date;
+
+
+        return string;
+    }
 
     public void print(String string) {
-        Console console = new Console(10, 100);
+        Console console = new Console(12, 100);
         console.create(text);
         console.outputPageText();
 

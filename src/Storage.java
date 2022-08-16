@@ -2,13 +2,13 @@ import java.io.File;
 
 
 public interface Storage {
-     void add();
+    void add();
 
 
     void view();
 
 
-    void setRoot();
+    boolean setRoot();
 
     void save();
 
@@ -16,8 +16,7 @@ public interface Storage {
 
     void openFileFromCollection(Storage storage);
 
+    void showFileAtributes(Storage storage);
 
     TextDoc openFile(File file);
-
-
 }

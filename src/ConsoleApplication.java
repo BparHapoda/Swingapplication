@@ -27,7 +27,7 @@ public class ConsoleApplication {
 
         menu.add("Задать корневую папку коллекции", storage::setRoot);
         menu.add("Показать коллекцию", storage::view);
-        menu.add("Показать свойства файла", System.out::println);
+        menu.add("Показать свойства файла", () -> storage.showFileAtributes(storage));
         menu.add("Сортировка коллекции", System.out::println);
         menu.add("Выход", () -> {
             storage.save();

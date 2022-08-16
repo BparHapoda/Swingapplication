@@ -21,6 +21,6 @@ public class Page {
 
     public void print() {
         System.out.println("Cтраница " + number);
-        text.stream().forEach(System.out::println);
+        text.forEach(System.out::println);
     }
 }

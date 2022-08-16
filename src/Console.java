@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.StringTokenizer;
 
 public class Console {
-    private ArrayList<Page> pages = new ArrayList<>();
+    private final ArrayList<Page> pages = new ArrayList<>();
     private final int line;
     private final int symbolsInLine;
     int index = 1;
@@ -14,30 +14,26 @@ public class Console {
     }
 
     public void create(String text) {
-        int numberPage = 1;
         ArrayList<String> lines = new ArrayList<>();
         StringBuilder stringBuilder = new StringBuilder();
         StringBuilder textLine = new StringBuilder();
 
         StringTokenizer stringTokenizer = new StringTokenizer(text, " ");
-        int lineCounter;
-        while (true) {
-            if (!stringTokenizer.hasMoreTokens()) {
-                break;
-            }
+        while (stringTokenizer.hasMoreTokens()) {
             stringBuilder.delete(0, stringBuilder.length());
             stringBuilder.append(stringTokenizer.nextToken());
             stringBuilder.append(" ");
-            if ((textLine.length() + stringBuilder.length()) >= symbolsInLine) {
+            if (((textLine.length() + stringBuilder.length()) >= symbolsInLine) || !stringTokenizer.hasMoreTokens()) {
+                textLine.append(stringBuilder);
                 lines.add(textLine.toString());
                 textLine.delete(0, textLine.length());
-                textLine.append(stringBuilder);
+                //         textLine.append(stringBuilder);
             } else {
                 textLine.append(stringBuilder);
                 stringBuilder.delete(0, stringBuilder.length());
             }
 
-            if (lines.size() == line) {
+            if (lines.size() == line || !stringTokenizer.hasMoreTokens()) {
                 pages.add(new Page(lines, pages.size() + 1));
                 lines = new ArrayList<>();
             }
@@ -66,6 +62,7 @@ public class Console {
     }
 
     public void printPage() {
+
         if (index < 1) {
             index = 1;
         }

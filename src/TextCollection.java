@@ -94,15 +94,21 @@ public class TextCollection implements Storage, Serializable {
         this.file = file;
     }
 
-    public void setRoot() {
+    public boolean setRoot() {
         System.out.println("Введите путь к коллекции текстовых файлов:");
         Scanner scanner = new Scanner(System.in);
+        String string = scanner.nextLine();
+        if (string.equals("ESC")) {
+            return false;
+        }
         File dir;
         do {
-            dir = new File(scanner.nextLine());
+            dir = new File(string);
         }
         while (!dir.isDirectory() && !dir.exists());
         file = dir;
+        save();
+        return true;
     }
 
     @Override
@@ -118,6 +124,18 @@ public class TextCollection implements Storage, Serializable {
 
     }
 
+    public void showFileAtributes(Storage storage) {
+        ArrayList<File> fileList = createFileList();
+        Menu menu3 = new Menu("Какой файл коллекции открыть :", false);
+        for (File x : fileList) {
+            menu3.add(x.toString(), () -> {
+                TextDoc textDoc = storage.openFile(x);
+                System.out.println(textDoc.showAttributes(x));
+            });
+        }
+        menu3.add("Выход", () -> menu3.setExit(true));
+        menu3.run();
+    }
 
     @Override
     public TextCollection open() {
